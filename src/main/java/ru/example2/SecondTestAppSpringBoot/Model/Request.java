@@ -45,7 +45,7 @@ public class Request {
     /***
      * Коэффициент позиции (должность)
      */
-    private Position position;
+    private Positions position;
     /***
      * Заработная плата
      */
@@ -85,6 +85,10 @@ public class Request {
                 ", systemName='" + systemName + '\'' +
                 ", systemTime='" + systemTime + '\'' +
                 ", source='" + source + '\'' +
+                ", positions=" + position +
+                ", salary=" + salary +
+                ", bonus=" + bonus +
+                ", workDays=" + workDays +
                 ", communicationId=" + communicationId +
                 ", templateId=" + templateId +
                 ", productCode=" + productCode +

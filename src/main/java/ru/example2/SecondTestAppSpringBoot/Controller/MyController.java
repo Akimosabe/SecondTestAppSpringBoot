@@ -15,6 +15,7 @@ import ru.example2.SecondTestAppSpringBoot.Exception.ValidationFailedException;
 import ru.example2.SecondTestAppSpringBoot.Model.*;
 import ru.example2.SecondTestAppSpringBoot.Service.ModifyRequestService;
 import ru.example2.SecondTestAppSpringBoot.Service.ModifyResponseService;
+import ru.example2.SecondTestAppSpringBoot.Service.QuarterlyBonusService;
 import ru.example2.SecondTestAppSpringBoot.Service.ValidationService;
 import ru.example2.SecondTestAppSpringBoot.Util.DateTimeUtil;
 
@@ -27,16 +28,20 @@ import java.util.Date;
 public class MyController {
     private final ValidationService validationService;
     private final ModifyResponseService modifyResponseService;
-    private final ModifyRequestService modifyRequestService;
+    // private final ModifyRequestService modifyRequestService;
+    private final QuarterlyBonusService quarterlyBonus;
 
 
     @Autowired
     public MyController(ValidationService validationService,
                         @Qualifier("ModifySystemTimeResponseService") ModifyResponseService modifyResponseService,
-                        @Qualifier("ModifySystemNameRequestService") ModifyRequestService modifyRequestService) {
+                        @Qualifier("ModifySystemNameRequestService") ModifyRequestService modifyRequestService,
+                        QuarterlyBonusService quarterlyBonus) {
         this.validationService = validationService;
         this.modifyResponseService = modifyResponseService;
-        this.modifyRequestService = modifyRequestService;
+        // this.modifyRequestService = modifyRequestService;
+        this.quarterlyBonus = quarterlyBonus;
+
     }
 
     @PostMapping(value = "/feedback")
@@ -48,14 +53,7 @@ public class MyController {
         log.info("Received request: {}", request);
 
 
-        Response response = Response.builder()
-                .uid(request.getUid())
-                .operationUid(request.getOperationUid())
-                .systemTime(DateTimeUtil.getCustomFormat().format(new Date()))
-                .code(Codes.SUCCESS)
-                .errorCode(ErrorCodes.EMPTY)
-                .errorMessage(ErrorMessages.EMPTY)
-                .build();
+        Response response = Washing.rsp(request, quarterlyBonus);
 
         log.info("Received request: {}", request);
 
@@ -88,7 +86,7 @@ public class MyController {
         }
 
         modifyResponseService.modify(response);
-        modifyRequestService.modify(request);
+        // modifyRequestService.modify(request);
 
 
         log.info("Modified response: {}", response);
