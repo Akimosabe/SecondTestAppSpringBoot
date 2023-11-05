@@ -11,6 +11,7 @@ import ru.example2.SecondTestAppSpringBoot.Model.Request;
 
 
 @Service
+@Qualifier("ModifySystemNameRequestService")
 public class ModifySystemNameRequestService implements ModifyRequestService {
     @Override
     public void modify(Request request) {
@@ -18,10 +19,10 @@ public class ModifySystemNameRequestService implements ModifyRequestService {
 
         HttpEntity<Request> httpEntity = new HttpEntity<>(request);
 
-        new RestTemplate().exchange("http://localhost:8084/feedback",
+        new RestTemplate().exchange("http://localhost:8088/feedback",
                 HttpMethod.POST,
                 httpEntity,
-                new ParameterizedTypeReference<Object>() {
+                new ParameterizedTypeReference<>() {
                 });
     }
 }
