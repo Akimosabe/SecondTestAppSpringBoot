@@ -18,32 +18,32 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class Request {
     /***
-     * Уникальный идентификатор сообщение
+     * Идентификатор пользователя
      */
     @NotBlank(message = "uid не может быть пустым")
     @Size(max = 32, message = "uid не должен превышать 32 символа")
     private String uid;
     /***
-     * Уникальный идентификатор операции
+     * Идентификатор операции
      */
     @NotBlank(message = "operationUid не может быть пустым")
     @Size(max = 32, message = "operationUid не может превышать 32 символа")
     private String operationUid;
     /***
-     * Имя системы отправителя
+     * Имя системы
      */
     private String systemName;
     /***
-     * Время создания сообщения
+     * Системное время
      */
     @NotBlank(message = "systemTime не может быть пустым")
     private String systemTime;
     /***
-     * Наименование ресурса
+     * Источник
      */
     private String source;
     /***
-     * Коэффициент позиции (должность)
+     * Позиция
      */
     private Positions position;
     /***
@@ -51,21 +51,21 @@ public class Request {
      */
     private Double salary;
     /***
-     * Коэффициент прибыли
+     * Бонус
      */
     private Double bonus;
     /***
-     * Количеств отработанных дней
+     * Количество дней
      */
     private Integer workDays;
     /***
-     * Уникальный идентификатор коммуникации
+     * Идентификатор связи
      */
     @Min(value = 1, message = "communicationId не может быть меньше 1")
     @Max(value = 100000, message = "communicationId не может быть больше 100000")
     private int communicationId;
     /***
-     * Уникальный идентификатор шаблона
+     * Идентификатор шаблона
      */
     private int templateId;
     /***
@@ -73,7 +73,7 @@ public class Request {
      */
     private int productCode;
     /***
-     * Смс код
+     * Смс-код
      */
     private int smsCode;
 
